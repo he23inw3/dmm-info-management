@@ -21,9 +21,9 @@ class LineUtil(object):
         
         try:
             self.logger.info("LINE Messaging API プッシュ通知 実行開始")
-            announcement_message = TextSendMessage(text = "セール中の商品があります。")
+            announcement_message = TextSendMessage(text = "SALE中の商品があります。")
             image_carousel_template_message = TemplateSendMessage(
-                alt_text="お気に入り商品 セール中",
+                alt_text="お気に入り商品 SALE中",
                 template=CarouselTemplate(
                     columns = [
                         CarouselColumn(
@@ -52,7 +52,7 @@ class LineUtil(object):
     def push_disappointment_message(self):
         try:
             self.logger.info("LINE Messaging API プッシュ通知 実行開始")
-            self.line_bot_api.broadcast(messages=TextSendMessage(text = "セール中の商品がありませんでした。"))
+            self.line_bot_api.broadcast(messages=TextSendMessage(text = "SALE中の商品がありませんでした。"))
         except Exception as e:
             self.logger.exception("LINE接続関連エラー")
             raise e
