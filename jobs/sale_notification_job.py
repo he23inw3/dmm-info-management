@@ -22,9 +22,9 @@ class SaleNotificationJob(AbstractJob):
         self.logger.info(f"{self.get_name()} invoke start.")
         
         favorite_items = self.air_table_util.fetch_favorite_items()
-        not_bought_favorite_items = list(filterfalse(lambda x : x.is_bought, favorite_items))
+        not_bought_favorite_items = list(filterfalse(lambda item : item.is_bought, favorite_items))
         items = self.dmm_util.fetch_items(not_bought_favorite_items)
-        sale_items = list(filter(lambda x : x.is_sale, items))
+        sale_items = list(filter(lambda item : item.is_sale, items))
         
         if sale_items:
             self.line_util.push_announcement(sale_items)
@@ -35,4 +35,4 @@ class SaleNotificationJob(AbstractJob):
         return JobStatus.OK
 
     def get_name(self) -> str:
-        return "Job001(セール情報配信)"
+        return "Job001(SALE情報配信)"
